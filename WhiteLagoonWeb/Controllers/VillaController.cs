@@ -29,6 +29,7 @@ namespace WhiteLagoonWeb.Controllers
             if (ModelState.IsValid) {
                 _context.Villas.Add(villa);
                 _context.SaveChanges();
+                TempData["success"] = "Villa has been created successfully.";
                 return RedirectToAction("Index");
             }
             
@@ -52,6 +53,7 @@ namespace WhiteLagoonWeb.Controllers
             {
                 _context.Villas.Update(villa);
                 _context.SaveChanges();
+                TempData["success"] = "Villa has been update successfully.";
                 return RedirectToAction("Index");
             }
             return View();
@@ -74,8 +76,10 @@ namespace WhiteLagoonWeb.Controllers
             if (objFromDb is not null) { 
                 _context.Villas.Remove(objFromDb);
                 _context.SaveChanges();
+                TempData["success"] = "Villa has been deleted successfully.";
                 return RedirectToAction("Index");
             }
+            TempData["error"] = "Villa could not be deleted.";
             return View();
         }
     }
